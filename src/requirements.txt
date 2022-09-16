@@ -1,0 +1,6 @@
+tornado==6.2
+tornado-sqlalchemy==0.7.0
+psycopg2-binary==2.9.3
+pytest==7.1.2
+mmh3==3.0.0
+PyYAML==6.0

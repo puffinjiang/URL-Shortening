@@ -1,0 +1,5 @@
+short_link:
+  sqlalchemy_database_uri: "sqlite:///:memory:"
+  sqlalchemy_track_modifications: False
+  check_token: 16602d2dce015524ebba58a9f7efdafa
+  base62_str: H8kENhZoevU24I7PXszxlugqYJC05AyjwWbaSrmtOLp6dVTnQGRDf93BKci1FM
