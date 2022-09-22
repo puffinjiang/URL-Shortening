@@ -16,7 +16,7 @@ import setting as setting
 from base_application import base_app
 from models.link_mapping import LinkMapping
 from tornado.web import RequestHandler
-from tornado_sqlalchemy import SessionMixin
+from tornado_sqlalchemy import SessionMixin, as_future
 from utils.common import (generate_short_key_by_url, http_url_check,
                           str_to_datetime)
 
@@ -50,8 +50,11 @@ class ShortTen(BaseRequestHandle):
             if expire_time:
                 expire_time = str_to_datetime(expire_time)
             with self.make_session() as session:
-                link_map = session.query(LinkMapping).filter(
-                    LinkMapping.url == url).first()
+                # link_map = session.query(LinkMapping).filter(
+                #     LinkMapping.url == url).first()
+                link_map = await as_future(
+                    session.query(LinkMapping).filter(
+                        LinkMapping.url == url).first)
                 if not link_map:
                     link_map = LinkMapping(url=url)
                     # 获取key并更新到数据库
@@ -91,8 +94,8 @@ class ShortLink(BaseRequestHandle):
             _logger.info(f"Received redirect short link "
                          f"from: {self.request.remote_ip}, key: {key}")
             with self.make_session() as session:
-                link_map = session.query(LinkMapping).filter_by(
-                    key=key).first()
+                link_map = await as_future(
+                    session.query(LinkMapping).filter_by(key=key).first)
                 if link_map:
                     return self.redirect(link_map.url, status=302)
                 return self.write({"code": 400, "message": "不存在的网页"})
