@@ -7,7 +7,6 @@
 @Version :   1.0
 '''
 
-
 import json
 import string
 from logging import getLogger
@@ -18,7 +17,8 @@ from base_application import base_app
 from models.link_mapping import LinkMapping
 from tornado.web import RequestHandler
 from tornado_sqlalchemy import SessionMixin
-from utils.common import generate_short_key_by_url, http_url_check, str_to_datetime
+from utils.common import (generate_short_key_by_url, http_url_check,
+                          str_to_datetime)
 
 _logger = getLogger(__name__)
 

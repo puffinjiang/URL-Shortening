@@ -2,7 +2,7 @@ version: 1
 # 将信息传播到配置文件的跟日志记录器中
 disable_existing_loggers: False
 
-base_dir: &base_dir ./data/logs
+base_dir: &base_dir /data/logs
 
 formatters:
   simple:
